@@ -1,0 +1,98 @@
+body{
+    background-color: rgb(186, 220, 201);
+}
+
+.container{
+    display: flex;
+    justify-content: space-around;
+}
+
+.head_container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.card{
+    text-align: center;
+    /* width: 5rem; */
+    height: 5rem;
+    padding: 0.8rem ;
+    font-size: 4.5rem;
+    background-color: rgba(94, 227, 70, 0.896);
+    margin-left: 4rem;
+}
+
+h1{
+    text-align: center;
+    font-size: 3rem;
+}
+h2 {
+    text-align: center;
+    font-size: 2.4rem;
+}
+h3 {
+    text-align: center;
+    font-size: 2rem;
+}
+
+
+.box1{
+    border: solid ;
+}
+.box2{
+    border: solid ;
+}
+
+.column{
+    display: flex;           /* Apply Flexbox */
+    justify-content: center; /* Center horizontally */
+    align-items: center;     /* Center vertically */
+    
+    width: 2rem;
+    height: 2rem;
+    padding: 1rem ;
+    background-color: #eb7836a6;
+    border: solid 2px ;
+}
+
+.crossed{
+    background-color: rgba(21, 253, 0, 0.624);
+}
+.wrong {
+    background-color: rgba(253, 0, 0, 0.624);
+}
+
+.container_btn{
+    display: flex;
+    justify-content: space-evenly;
+    margin: 3rem;
+}
+button{
+    font-size: 2rem;
+    background-color: rgb(119, 119, 250);
+    border-radius: 3px;
+    padding: 1rem;
+}
+
+
+
+.row{
+    display: flex;
+    justify-content: space-around;
+}
+
+
+@media (max-width: 580px) {
+
+    .column {
+        width: 1.2rem;
+        height: 1.2rem;
+        font-size: 0.7rem;
+    }
+
+    .container {
+        flex-direction: column; 
+        align-items: center;
+    }
+}
