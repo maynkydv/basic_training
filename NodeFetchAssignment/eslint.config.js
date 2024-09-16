@@ -11,15 +11,3 @@ const compat = new FlatCompat({
   resolvePluginsRelativeTo: __dirname,
 });
 
-/** @type {import('eslint').Linter.FlatConfig[]} */
-export default [
-  ...compat.extends("airbnb-base"),
-  {
-    rules: {
-      "arrow-body-style": ["error", "always"],
-    },
-  },
-  {
-    ignores: [ "eslint.config.js" ],
-  }
-];

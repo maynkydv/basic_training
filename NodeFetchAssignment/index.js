@@ -1,5 +1,14 @@
-import { getEmployees, getEmployeeById , createEmployee ,updateEmployeeById , deleteEmployeeById  } from "./fetchApis.js";
+import {
+  getEmployees,
+  getEmployeeById,
+  createEmployee,
+  updateEmployeeById,
+  deleteEmployeeById,
+} from './apiService.js';
 
+/**
+ * Starts the application.
+ */
 async function start() {
   await getEmployees();
   await getEmployeeById(21);
@@ -7,4 +16,5 @@ async function start() {
   await updateEmployeeById(14);
   await deleteEmployeeById(15);
 }
+
 start();
