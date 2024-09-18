@@ -1,0 +1,153 @@
+git repo --> https://github.com/maynkydv/i-am-a-git-noob.git
+
+
+
+Follow the story below, and document your answers/commands and share them with us.
+Create a private github repo named "i-am-a-git-noob"
+Create a new repository on local in an empty directory (NOTE: do not clone)
+mkdir -v i-am-a-git-noob
+	    cd i-am-a-git-noob
+	    git init
+	    
+Ques: What changes did you observe in the current directory after initialising local repo?
+→ new .git directory is created to store the local repo data
+
+Point remote of your local git repo to the newly created repo on github
+git remote add origin https://github.com/maynkydv/i-am-a-git-noob.git
+ 
+Print current git configs on terminal
+git config --local --list --show-origin
+
+
+Update git config with your name and email address (only for current repository)
+	git config --local user.name “maynkydv”
+
+Create a file named "test1.txt"
+touch test1.txt
+
+Added line with text "first line in file" in "test1.txt".
+echo "first line in file" > test1.txt 
+
+Push this file to your github repo.
+Doubt - need to create commit to push on github if yes
+
+git add test1.txt 
+git commit -m "test1 pushed on github"
+git push -u origin main
+
+Append line with text "second line in file" in "test1.txt".
+cat >> test1.txt
+second line in file 
+	Or
+echo "second line in file" >> test1.txt
+
+Add file to the staging area.
+git add test1.txt 
+
+Check the status of the file in all staging area
+git status
+
+Append line with text "Third line in file" in "test1.txt". (Note status of files across different areas).
+echo "Third line in file" >> test1.txt
+
+Remove "test1.txt" from the staging area.
+	Doing this  
+
+git  rm --cached test1.txt
+	Will give an error -
+		error: the following file has staged content different from both the file and the HEAD:
+    		test1.txt
+		(use -f to force removal)
+
+So we will stage the other changes and then remove the test1.txt file from stage
+	git add test1.txt
+	git rm --cached test1.txt
+
+
+
+Create commit with message "My First Commit"
+	git add test1.txt
+git commit -m "My First Commit"
+
+
+Push commit to the remote repo 
+NOTE: checklist commits pushed to the remote 
+
+
+
+	git log origin/main    => to see remote commits
+	git push -u origin main  => to push the commits remotely
+
+Update message of last commit "My First Commit" to "My Second Commit" (without creating a new commit)
+	git commit --amend -m “My Second Commit”
+
+Push commit with the updated message to the remote repo
+git push -u --force origin main   
+			⇒ as the amend take local main a commit ahead so we need          
+			to force to push the changes 
+
+Check the difference between the last and second last commits.
+git diff HEAD^ HEAD
+ OR 
+git log --oneline  -> commit hash is visible
+git diff 58f73d4  aeb0727
+
+OR
+git diff HEAD~1    
+OR
+git diff HEAD~1 HEAD 
+
+
+
+
+Revert the last commit and check the updated commit logs history.
+	Can’t revert directly because working directory is not clean and also partially staged ,
+	So stage it fully 
+git add test1.txt
+	And then remove it from stage but cached it on stash
+	git stash -m "trying to revert HEAD^"
+
+
+	git revert HEAD^
+ OR
+git log --oneline
+git revert 86d9be6
+
+git log --oneline
+
+
+
+Append line with text "Fourth line in file" in "test1.txt" and commit it.
+Before append apply the stashed files 
+	git stash apply 
+
+On branch main
+Your branch is ahead of 'origin/main' by 1 commit.
+  (use "git push" to publish your local commits)
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        test1.txt
+
+
+echo "Fourth line in file"  >> test1.txt
+
+
+Update the last commit such that the "test1.txt"  also contains "Fifth line in file" (without creating a new commit)
+git add test1.txt 
+git commit --amend -m ”Add 4th line”
+
+
+Push the updated commits to the remote repository
+git push -u origin main
+
+Append some content in "test1.txt" file
+ echo "Some Content added" >> test1.txt
+
+Pull all the content from remote repository to local repository
+	git pull 
+
+Clone the remote repository to some other directory in your local system.
+git clone <git_remote_project_url>
+
+git clone <https://github.com/maynkydv/i-am-a-git-noob>
