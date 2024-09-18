@@ -1,0 +1,346 @@
+Overview
+
+	APIs provide a secure and standardised way for applications to work together, delivering information or functionality without user intervention.
+Using the RestAPI architecture, will make code readable, maintainable as well as organised.
+So, overall the apis endpoints and parameters in the project are based on RestAPI architecture.
+
+Base URL
+
+The consistent part or the root of your website’s address. 
+
+For example, http://www.YourDomain.com/
+
+And when working on local server this base url will be - 
+		http://localhost:5000/ 
+These were the urls when opened will open ‘/’ end point of the project if defined, or will be redirected to HOME .
+
+ Authentication
+
+Method 
+JWT (JSON Web Token) Authentication: All requests (except user sign-up and login) must include a valid JWT token in the Authorization header.
+
+
+	'auth-token' : '<token>' 
+
+
+Process 
+User Login: On successful login, the server issues a JWT token.
+
+
+Protected Endpoints: Use the token to access protected endpoints by including it in 
+       the Authorization header as auth-token <token>.
+
+
+Middleware function is used to check the authentication and authorization simultaneously, validation of token is used to ensure the authentication of the client request, payload in the JWT token is used to check authority of accessing the API service i.e authorization . 
+
+ Endpoints  
+1. User Sign-Up 
+	Endpoint is used to create a user and its credential in the database.
+
+
+URL : /auth/signup
+HTTP Method: POST
+Request Headers: 'Content-Type': 'application/json'
+
+
+Request Body:
+{
+    "username": "user_name",
+    "email": "user@email.com",
+    "password": "securePassword"
+}
+
+
+Response Body:
+{
+    "message": "User registered successfully.",
+    "user_id": "1a2b3c4d"
+}
+
+
+Status Codes:
+201 Created: User registered successfully.
+400 Bad Request: Validation failed 
+409 Conflict: Email or username already exists.
+
+
+	
+
+2. User Login 
+Endpoint is used to authenticate users and generate the JWT token. 
+
+URL: /auth/login
+HTTP Method: POST
+
+
+Request Headers: 
+{
+   "Content-Type" : "application/json"
+}	
+
+
+Request Body:
+{
+    "email": "user@email.com",
+    "password": "securePassword"
+}
+
+
+Response Body:
+{
+    "token": "jwtToken12345"
+}
+
+
+Status Codes:
+200 OK: Login successful.
+401 Unauthorised: Incorrect email or password.
+400 Bad Request: Validation failed.
+ 
+3. Send Friend Request
+	Endpoint is used for sending friend requests and updating the user’s friend requests list.
+URL: /friends/request
+HTTP Method: POST
+
+
+Request Headers:
+{
+   "Content-Type" : "application/json",
+   "auth-token" : "jwtToken12345"
+}
+
+
+Request Body:
+{
+    "friend_id": "2b3c4d5e"
+}
+
+
+Response Body:
+{
+    "message": "Friend request sent."
+}
+
+
+Status Codes:
+200 OK: Friend request sent successfully.
+400 Bad Request: Validation failed.
+404 Not Found: User not found.
+409 Conflict: Friend request already sent or users are already friends.
+4. Accept or Reject Friend Request  
+This endpoint is used to add friends to the user friend list.
+
+
+URL: /friends/respond
+HTTP Method: POST
+
+
+Request Headers:
+{
+   "Content-Type" : "application/json",
+   "auth-token" : "jwtToken12345"
+}
+
+
+Request Body:
+{
+    "friend_id": "5e6f7g8h",
+    "action": "accept"  or "reject"
+}
+Response Body:
+{
+    "message": "Friend request accepted."
+}
+Status Codes:
+200 OK: Action performed successfully.
+400 Bad Request: Validation failed.
+404 Not Found: Friend request not found.
+409 Conflict: Request already responded to.
+
+
+
+5. Create Post 
+Endpoint is used to create a post.
+
+
+URL: /posts
+HTTP Method: POST
+
+
+Request Headers:
+{
+   "Content-Type" : "application/json",
+   "auth-token" : "jwtToken12345"
+}
+Request Body:
+{
+    	    "content": "This is my first post!"
+}
+
+
+Response Body:
+{
+    "post_id": "7h8i9j0k",
+    "message": "Post created successfully."
+}
+Status Codes:
+201 Created: Post created successfully.
+400 Bad Request: Validation failed.
+
+
+
+
+
+
+
+
+
+
+6. Like a Post 
+Endpoint used to add likes to the post collection.
+
+
+URL: /posts/{post_id}/like
+HTTP Method: POST
+
+
+Request Headers:
+{
+   "Content-Type" : "application/json",
+   "auth-token" : "jwtToken12345"
+}
+
+
+Response Body:
+{
+    "message": "Post liked."
+}
+
+
+Status Codes:
+200 OK: Post liked successfully.
+404 Not Found: Post not found.
+409 Conflict: Post already liked by the user.
+
+
+Validation:
+Post ID: Required, valid post ID.
+
+7. List Posts 
+
+
+Endpoint is used to get the list of the posts.
+ 
+URL: /posts
+HTTP Method: GET
+
+
+Request Headers:
+Authorization: Bearer <token>
+
+
+Response Body:
+{
+    "posts": [
+        {
+            "post_id": "7h8i9j0k",
+            "content": "This is my first post!",
+            "likes": 10
+        },
+        ...
+    ]
+}
+
+
+Status Codes:
+200 OK: Posts retrieved successfully.
+204 No Content: No posts available.
+
+
+
+
+
+
+
+
+
+
+Validation: Specify any validation rules for the input fields.
+Security: Mention security best practices for the API.
+Database Design: (Bonus) Consider the database design and how it correlates with the API calls.
+
+
+
+
+
+ Validation 
+
+
+Username: Required, alphanumeric, 3-30 characters.
+Email: Required, valid email format.
+Password: Required, minimum 8 characters
+Action: Required, should be either accept or reject.
+Content: Required, text only, max 256 characters.
+
+
+
+
+
+ Security 
+HTTPS: All communications with the API must be done over HTTPS to protect against man-in-the-middle attacks.
+
+
+JWT Expiry: JWT tokens should have an expiration time to limit exposure if compromised.
+
+
+Data Validation: All input data must be validated to prevent common vulnerabilities like MongoDb Models .
+
+
+Password Hashing: User passwords must be hashed and salted using a secure algorithm (e.g., bcrypt) before storing in the database.
+
+
+ Database Design 
+MongoDB Database (No SQL) - 
+Mainly there are two collections named User, Post. 
+
+User Schema - 
+{
+username: {
+type: Sting,
+minLength:3,
+maxlength: 30,
+unique: true,
+required: true
+    	},
+   	email: {
+        		type: String
+    	},
+    	password: {
+        		type: String,
+        		minLength: 4,
+        		required: true
+    	},
+	friends : [{
+	user_id: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
+}],
+friend_request :  [{
+	user_id: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
+}]
+}
+
+
+Post Schema - {
+user_id: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+            content: {
+        		type: String,
+		minLength:3,
+maxlength: 30,
+required: true
+    	},
+like: {
+        		type: Number
+    	}
+}
+
+
+
