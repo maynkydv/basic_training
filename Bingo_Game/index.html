@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Bingo !! </title>
+</head>
+
+<body>
+    <h1>Bingo !!</h1>
+
+    <div class="head_container">
+        <h2>Current Symbol </h2>
+        <div class="card" id="next-symbol">  </div>
+    </div>
+    <div class="container">
+        <div class="player1">
+            <h3>Player 1</h3>
+            <div class="box1" id="player1-grid"></div>
+        </div>
+
+        <div class="player2">
+            <h3>Player 2</h3>
+            <div class="box2" id="player2-grid"></div>
+        </div>
+    </div>
+    <div class="container_btn">
+        <button id="auto-mark" onclick=autoMark()>
+            Auto Mark
+        </button>
+        <button id="start" onclick=start()>
+            Next Symbol
+        </button>
+        <button id="restart" onclick=restart()>
+            Restart
+        </button>
+    </div>
+    <script src="index.js"></script>
+</body>
+
+</html>
