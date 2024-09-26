@@ -1,28 +1,23 @@
 const express = require('express');
 const sequelize = require('./config/configConnection');
 const User = require('./models/user');
-const Post = require('./models/post');  
-
-
-
+const Post = require('./models/post');
 
 const app = express();
 app.use(express.json());
 
-// Test database connection used only to make connection 
 sequelize.authenticate()
   .then(() => {
     console.log('Database connected...');
   })
-  .catch(err => {
-    console.log('Error: ' + err);
+  .catch((err) => {
+    console.log(`Error: ${err}`);
   });
 
-// Sync will create the models 
+// Sync will create the models
 sequelize.sync();
 // sequelize.sync({ force: true })
 // sequelize.sync({ force: true })
-
 
 //! USER CRUD OPERATIONS
 // CREATE - Add a new user
@@ -109,19 +104,19 @@ app.get('/posts', async (req, res) => {
   }
 });
 
-//READ - Get post by post ID
+// READ - Get post by post ID
 app.get('/posts/:id', async (req, res) => {
-    try {
-      const post = await Post.findByPk(req.params.id);
-      if (post) {
-        res.json(post);
-      } else {
-        res.status(404).json({ error: 'Post not found' });
-      }
-    } catch (error) {
-      res.status(500).json({ error: error.message });
+  try {
+    const post = await Post.findByPk(req.params.id);
+    if (post) {
+      res.json(post);
+    } else {
+      res.status(404).json({ error: 'Post not found' });
     }
-  });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
 
 // READ - Get posts by user ID
 app.get('/users/:userId/posts', async (req, res) => {
@@ -162,12 +157,7 @@ app.delete('/posts/:id', async (req, res) => {
   }
 });
 
-
-
 const PORT = 3000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
-
-
-

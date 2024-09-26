@@ -22,10 +22,9 @@ const client = new Client({
     // Another example: Insert a new user
     const insertUser = await client.query(
       'INSERT INTO "Users" (firstName, lastName, email) VALUES ($1, $2, $3) RETURNING *',
-      ['John', 'Doe', 'john@example.com']
+      ['John', 'Doe', 'john@example.com'],
     );
     console.log('Inserted User:', insertUser.rows[0]);
-
   } catch (err) {
     console.error('Error executing query', err);
   } finally {

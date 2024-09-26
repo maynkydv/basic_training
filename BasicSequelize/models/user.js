@@ -15,21 +15,6 @@ const User = sequelize.define('User', {
     allowNull: false,
     unique: true,
   },
-}
-// ,
-// {
-//     freezeTableName: true, // Prevent Sequelize from pluralizing table name
-
-// don't add the timestamp attributes (updatedAt, createdAt)
-//  timestamps: false,
-
-  // If don't want createdAt
-//  createdAt: false,
-
-  // If don't want updatedAt
-//  updatedAt: false,
-
-//   }
-);
+});
 
 module.exports = User;
