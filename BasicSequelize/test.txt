@@ -1,0 +1,72 @@
+/*
+
+1. User API Requests
+
+
+//* Create a New User
+curl -X POST http://localhost:3000/users -H "Content-Type: application/json" \
+-d '{
+  "firstName": "User2",
+  "lastName": "Sr 2",
+  "email": "user2@example.com"
+}'
+
+
+//* Get All Users
+curl http://localhost:3000/users
+
+
+//* Get a Specific User by ID
+curl http://localhost:3000/users/1
+
+
+//* Update a User by ID
+curl -X PUT http://localhost:3000/users/1 -H "Content-Type: application/json" \
+-d '{
+  "lastName": "yadav"
+}'
+
+
+//* Delete a User by ID
+curl -X DELETE http://localhost:3000/users/1
+
+
+2. Post API Requests
+//* Create a New Post (Associated with a User)
+You need to provide the userId when creating a post to associate it with an existing user.
+
+curl -X POST http://localhost:3000/posts -H "Content-Type: application/json" \
+-d '{
+  "title": "My First Post",
+  "content": "This is the content of my first post.",
+  "userId": 1
+}'
+
+
+//* Get All Posts
+curl http://localhost:3000/posts
+
+//* Get a Specific Post by ID
+curl http://localhost:3000/posts/1
+
+
+//* Get All Posts for a Specific User
+curl http://localhost:3000/users/1/posts
+
+
+
+
+//* Update a Post by ID
+curl -X PUT http://localhost:3000/posts/1 -H "Content-Type: application/json" \
+-d '{
+  "title": "Updated Title",
+  "content": "This is updated content for the post."
+}'
+
+
+//* Delete a Post by ID
+curl -X DELETE http://localhost:3000/posts/1
+curl http://localhost:3000/users/1/posts
+
+
+*/
