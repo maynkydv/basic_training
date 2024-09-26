@@ -1,0 +1,20 @@
+
+-> Intialisation and Creation 
+
+npx sequelize-cli seed:generate --name seed-users
+npx sequelize-cli seed:generate --name seed-posts
+npx sequelize-cli seed:generate --name seed-userData
+
+
+-> apply all seed
+npx sequelize-cli db:seed:all
+
+
+-> apply any named seed
+npx sequelize-cli db:seed --seed 20240926095735-seed-userData
+
+
+-> undo seeder
+npx sequelize-cli db:seed:undo --seed 20240926095735-seed-userData
+
+npx sequelize-cli db:seed:undo:all

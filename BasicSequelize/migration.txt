@@ -1,0 +1,34 @@
+Intialisation
+
+npm install --save-dev sequelize-cli
+npx sequelize-cli init
+
+
+-> Migration Creation
+
+npx sequelize-cli migration:generate --name create-users-table
+
+
+
+
+-> Run Migration
+
+npx sequelize-cli db:migrate
+
+
+To apply the migrations (i.e., create the Users and Posts tables in the database), run the following command:
+npx sequelize-cli db:migrate
+
+This will run the up methods in all your migration files and create the Users and Posts tables.
+
+ -> Rollback Migrations
+If you need to undo the last migration (or roll back the database schema to an earlier state), you can run:
+
+
+npx sequelize-cli db:migrate:undo
+
+
+
+->If you want to undo all migrations:
+
+npx sequelize-cli db:migrate:undo:all
